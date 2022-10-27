@@ -35,6 +35,7 @@ function addNewItem() {
 
 	cacheTodoItems();
 	renderList();
+	updateStatus();
 }
 
 function renderList() {
@@ -66,6 +67,14 @@ function toggleCompleted(item) {
 		ListItemElement.classList.remove("completed");
 	}
 	cacheTodoItems();
+
+	updateStatus();
+}
+
+function updateStatus(){
+	const completedItemsCount = todoItems.filter((x) => x.completed == true).length; 
+	StatusElement.innerHTML = completedItemsCount + "of" + todoItems.length + "item are completed ";
+
 }
 
 init();
