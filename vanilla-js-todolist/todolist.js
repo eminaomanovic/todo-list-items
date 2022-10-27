@@ -6,7 +6,18 @@ let todoItems = [];
 
 function init() {
 	AddButtonElement.addEventListener("click", addNewItem);
-	InputElement.addEventListener("keypress", (e)=>{if(e.key.toLowerCase() == "enter") addNewItem();})
+	InputElement.addEventListener("keypress", (e) => {
+		if (e.key.toLowerCase() == "enter") addNewItem();
+	});
+	const cachedTodoItems = JSON.parse(localStorage.getItem("todoList"));
+	if (cachedTodoItems) {
+		todoItems = cachedTodoItems;
+		renderList();
+	}
+}
+
+function cacheTodoItems() {
+	localStorage.setItem("todoList", JSON.stringify(todoItems));
 }
 
 function addNewItem() {
@@ -22,6 +33,7 @@ function addNewItem() {
 	todoItems.push(newTodoItem);
 	InputElement.value = "";
 
+	cacheTodoItems();
 	renderList();
 }
 
@@ -53,6 +65,7 @@ function toggleCompleted(item) {
 	} else {
 		ListItemElement.classList.remove("completed");
 	}
+	cacheTodoItems();
 }
 
 init();
