@@ -6,6 +6,7 @@ let todoItems = [];
 
 function init() {
 	AddButtonElement.addEventListener("click", addNewItem);
+	InputElement.addEventListener("keypress", (e)=>{if(e.key.toLowerCase() == "enter") addNewItem();})
 }
 
 function addNewItem() {
